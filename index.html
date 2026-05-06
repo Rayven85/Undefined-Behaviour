@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undefined Behavior — Rayven</title>
+  <meta name="description" content="Rayven — Computer Science student, software engineer, researcher.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Hidden SVG grain filter -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+        <feBlend in="SourceGraphic" in2="gray" mode="soft-light"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Film grain overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Needle-drop scratch line -->
+  <div class="scratch-line" id="scratch-line" aria-hidden="true"></div>
+
+  <!-- Fixed navigation -->
+  <nav class="vinyl-nav" aria-label="Section navigation">
+    <div class="nav-progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+      <div class="progress-fader" id="progress-fader" aria-hidden="true"></div>
+    </div>
+    <div class="nav-inner">
+      <span class="nav-catalog">RZ-085</span>
+      <div class="nav-vu" aria-hidden="true">
+        <span class="vu-bar"></span>
+        <span class="vu-bar"></span>
+        <span class="vu-bar"></span>
+      </div>
+      <div class="nav-links">
+        <a href="#cover"       class="nav-link" data-section="cover">Cover</a>
+        <a href="#tracks"      class="nav-link" data-section="tracks">Tracks</a>
+        <a href="#liner-notes" class="nav-link" data-section="liner-notes">Liner Notes</a>
+        <a href="#sessions"    class="nav-link" data-section="sessions">Sessions</a>
+        <a href="#credits"     class="nav-link" data-section="credits">Credits</a>
+      </div>
+      <span class="nav-side-indicator" id="side-indicator">SIDE A · Track 1</span>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════════
+         SECTION 1 — COVER
+    ══════════════════════════════════════════ -->
+    <section id="cover" class="section cover-section">
+      <div class="cover-inner">
+
+        <div class="vinyl-wrapper" id="vinyl-wrapper">
+          <div class="disc-stage">
+            <img src="public/CD.PNG" class="cd-spin-img" id="vinyl-disc" alt="" aria-hidden="true">
+            <img src="public/stylusarm.PNG" class="stylusarm-img" id="stylusarm" alt="" aria-hidden="true">
+          </div>
+          <div class="vinyl-shadow" aria-hidden="true"></div>
+          <div class="cover-sticker" role="note" aria-label="Now seeking 2026 software engineering and research roles">
+            <span class="sticker-star" aria-hidden="true">★</span>
+            <span class="sticker-eyebrow">NOW SEEKING</span>
+            <span class="sticker-main">Internships &nbsp;·&nbsp; Part-time<br>SWE &nbsp;·&nbsp; CS</span>
+            <span class="sticker-detail">Auckland · Remote · Hybrid</span>
+          </div>
+        </div>
+
+        <div class="cover-text">
+          <p class="cover-catalog-num">CAT. NO. RZ-085 &nbsp;·&nbsp; STEREO &nbsp;·&nbsp; 33⅓ RPM</p>
+          <h1 class="cover-title foil-text">UNDEFINED<br>BEHAVIOR</h1>
+          <p class="cover-artist foil-text">RAYVEN</p>
+          <p class="cover-tagline">Software Engineering &nbsp;·&nbsp; CS &nbsp;·&nbsp; Computer Vision<br>>Full-Stack &nbsp;·&nbsp; Web Development &nbsp;·&nbsp; Data Analysis</p>
+          <p class="cover-status">
+            <span class="cover-status-dot" aria-hidden="true"></span>
+            MEng @ University of Auckland · Available Now
+          </p>
+          <a href="#tracks" class="cover-cta">
+            <span class="cta-triangle">▶</span>
+            Play from start
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Manufacturing details — fake-real album cover trivia -->
+      <div class="cover-product-info" aria-hidden="true">
+        <div class="prod-row">
+          <span class="prod-label">FORMAT</span>
+          <span class="prod-val">DIGITAL · LOSSLESS</span>
+        </div>
+        <div class="prod-row">
+          <span class="prod-label">MASTERING</span>
+          <span class="prod-val">DDD · 24bit / 96kHz</span>
+        </div>
+        <div class="prod-row">
+          <span class="prod-label">PRESSED IN</span>
+          <span class="prod-val">AOTEAROA · NEW ZEALAND</span>
+        </div>
+        <div class="prod-row prod-row--barcode">
+          <div class="barcode" aria-hidden="true"></div>
+          <span class="prod-val prod-val--small">RZ–001 · 2026</span>
+        </div>
+      </div>
+
+      <div class="cover-scroll-hint" aria-hidden="true">scroll ↓</div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 2 — TRACK LISTING
+    ══════════════════════════════════════════ -->
+    <section id="tracks" class="section tracks-section">
+      <div class="section-inner">
+
+        <div class="tracks-header">
+          <h2 class="section-label">TRACK LISTING</h2>
+          <p class="tracks-subhead">All compositions by Rayven. Recorded 2021–Present.</p>
+        </div>
+
+        <div class="tracks-sides">
+
+          <div class="side-block">
+            <h3 class="side-label">SIDE A — FOUNDATIONS</h3>
+            <ol class="track-list">
+              <li class="track-item blur-reveal" data-target="#liner-notes">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">A1</span>
+                <span class="track-title">Who I Am</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">3:22</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#liner-notes">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">A2</span>
+                <span class="track-title">Stack Overflow (Of The Heart)</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">4:07</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">A3</span>
+                <span class="track-title">First Commit</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">2:55</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">A4</span>
+                <span class="track-title">Distributed Minds</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">5:14</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">A5</span>
+                <span class="track-title">Race Condition (feat. Three Deadlines)</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">3:48</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#credits">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">A6</span>
+                <span class="track-title">Segfault in My Stars</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">6:01</span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="side-divider" aria-hidden="true"></div>
+
+          <div class="side-block">
+            <h3 class="side-label">SIDE B — RUNTIME</h3>
+            <ol class="track-list">
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">B1</span>
+                <span class="track-title">Memory Leak (Nostalgia Remix)</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">4:33</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">B2</span>
+                <span class="track-title">O(1) Love</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">3:19</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">B3</span>
+                <span class="track-title">The Paper That Almost Wasn't</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">7:22</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#sessions">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">B4</span>
+                <span class="track-title">Null Pointer Exception (Live)</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">2:58</span>
+              </li>
+              <li class="track-item blur-reveal" data-target="#credits">
+                <span class="track-play" aria-hidden="true">▶</span>
+                <span class="track-num">B5</span>
+                <span class="track-title">Let's Build Something</span>
+                <span class="track-leader" aria-hidden="true"></span>
+                <span class="track-time">∞</span>
+              </li>
+            </ol>
+          </div>
+
+        </div>
+
+        <p class="tracks-footer">Total running time: approx. 4 years &amp; counting</p>
+
+      </div>
+
+      <!-- lotsofCD photo — scroll-driven blur-to-clear -->
+      <img src="public/lotsofCD.jpg" class="tracks-cd-deco" id="tracks-cd-deco" alt="" aria-hidden="true">
+
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 3 — LINER NOTES
+    ══════════════════════════════════════════ -->
+    <section id="liner-notes" class="section liner-section">
+      <div class="section-inner">
+
+        <div class="liner-header">
+          <h2 class="section-label">LINER NOTES</h2>
+        </div>
+
+        <div class="liner-grid">
+
+          <div class="liner-main">
+            <p class="liner-dropcap">
+              There's a specific kind of satisfaction in shipping something that actually
+              works — not just runs, but solves a real problem for a real person. That's
+              what keeps me up at 2am, not the deadline.
+            </p>
+
+            <div class="liner-body-wrap has-paper-bg">
+              <p class="liner-body">
+                I’m Rayven, a Software Engineer currently based at the University of Auckland. 
+                My technical DNA is a bit of a hybrid: I began my journey in Digital Media 
+                Technology at NJUPT, but driven by a hunger for deeper logic, I recalibrated 
+                my path to Data Science and Big Data. This transition granted me a unique duality—an 
+                intuitive eye for aesthetics paired with the cold, hard reasoning of data-driven systems.
+              </p>
+              <p class="liner-body">
+                My research has taken me into [your research area], where I learned that
+                every elegant system hides a beautiful mess underneath. I've co-authored
+                work that made it to [venue], which still surprises me on slow days.
+                After four years of rigorous data training, I moved into Software Engineering 
+                to focus on the "landing." I’m not just interested in how an algorithm runs in 
+                a lab; I want to see it ship. I find a specific satisfaction in bridging the gap 
+                between a complex mathematical formula and a tangible, industrial-grade 
+                product—whether that’s a pixel-perfect bilingual site or a high-speed CV tracking 
+                system.
+              </p>
+              <p class="liner-body">
+                Beyond the code, I consider myself a lifelong learner and a "pragmatic tinkerer." 
+                I thrive on the adrenaline of mastering new tools and maintain a high-efficiency 
+                output even when the pressure is on. In a team setting, I aim to be the steady 
+                hand—sincere, collaborative, and focused on moving the needle without the friction of ego.
+              </p>
+              
+              <p class="liner-body">
+                When the screen goes dark, you’ll likely find me lost in the narrative of a good 
+                novel or working on something tactile and handmade. Whether it’s building a physical 
+                craft or piecing together a complex plot, I find that the patience and precision required 
+                for manual work often inform my approach to engineering. I believe the best software 
+                doesn't just speak to machines—it speaks to the human experience. 
+                The following "Sessions" are a record of my attempts to find that harmony.
+              </p>
+            </div>
+
+            <div class="liner-skills">
+              <div class="skill-group">
+                <p class="skill-label">LANGUAGES</p>
+                <p class="skill-items">Python · Java · JavaScript · TypeScript · C · C++ · SQL</p>
+              </div>
+              <div class="skill-group">
+                <p class="skill-label">FRAMEWORKS & STACK</p>
+                <p class="skill-items">Next.js · React · FastAPI · Node.js · Express · PyTorch · OpenCV</p>
+              </div>
+              <div class="skill-group">
+                <p class="skill-label">TOOLS</p>
+                <p class="skill-items">Git · Linux · MongoDB · Sanity CMS · Android Studio · Tableau · YOLO</p>
+              </div>
+              <div class="skill-group">
+                <p class="skill-label">LANGUAGES SPOKEN</p>
+                <p class="skill-items">Mandarin(Native) · English · Japanese</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="liner-aside has-typewriter-bg" aria-label="Margin notes">
+            <div class="margin-note">
+              <p class="margin-label">★ PRODUCER'S NOTE</p>
+              <p class="margin-text">Built this site with no frameworks. Old habits die hard.</p>
+            </div>
+            <div class="margin-note">
+              <p class="margin-label">STUDIO NOTE</p>
+              <p class="margin-text">First pull request: 47 files changed. No regrets.</p>
+            </div>
+            <div class="margin-note">
+              <p class="margin-label">◈ ANNOTATION</p>
+              <p class="margin-text">"always learning something new" — the one constant in a sea of undefined behavior.</p>
+            </div>
+            <div class="margin-note">
+              <p class="margin-label">CURRENTLY ENROLLED</p>
+              <p class="margin-text">MEng Software Engineering, University of Auckland</p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 4 — RECORDED SESSIONS
+    ══════════════════════════════════════════ -->
+    <section id="sessions" class="section sessions-section">
+
+      <!-- Parallax waveform background -->
+      <div class="sessions-waveform-bg" id="sessions-waveform" aria-hidden="true">
+        <svg viewBox="0 0 1000 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- Three sine waves at different amplitudes / phases -->
+          <path d="M0,140 Q62,80 125,140 Q188,200 250,140 Q312,80 375,140 Q438,200 500,140 Q562,80 625,140 Q688,200 750,140 Q812,80 875,140 Q938,200 1000,140"
+                fill="none" stroke="#8B4513" stroke-width="1.2" opacity="0.6"/>
+          <path d="M0,160 Q83,90 167,160 Q250,230 333,160 Q417,90 500,160 Q583,230 667,160 Q750,90 833,160 Q917,230 1000,160"
+                fill="none" stroke="#8B4513" stroke-width="0.8" opacity="0.35"/>
+          <path d="M0,120 Q50,60 100,120 Q150,180 200,120 Q250,60 300,120 Q350,180 400,120 Q450,60 500,120 Q550,180 600,120 Q650,60 700,120 Q750,180 800,120 Q850,60 900,120 Q950,180 1000,120"
+                fill="none" stroke="#8B4513" stroke-width="0.6" opacity="0.2"/>
+        </svg>
+      </div>
+
+      <div class="section-inner">
+
+        <div class="sessions-header">
+          <h2 class="section-label">RECORDED SESSIONS</h2>
+          <p class="sessions-subhead">Selected works from the archive</p>
+        </div>
+
+        <div class="sessions-tabs" role="tablist">
+          <button class="tab-btn active" data-tab="experience" role="tab" aria-selected="true">Experience</button>
+          <button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">Projects</button>
+          <button class="tab-btn" data-tab="research" role="tab" aria-selected="false">Research</button>
+        </div>
+
+        <!-- Experience Tab -->
+        <div class="tab-content active" id="tab-experience" role="tabpanel">
+          <div class="sessions-grid">
+
+            <div class="card-wrap" style="--tilt: -0.5deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">SESSION 001</p>
+                <h3 class="session-company foil-text">Shanghai Huiyin Information Technology</h3>
+                <p class="session-role">Program Architecture Intern</p>
+                <p class="session-period">Jul 2024 – Feb 2025 · Shanghai</p>
+                <ul class="session-notes">
+                  <li>Designed a Java SDK encapsulating AIDL interfaces, deployed to POS terminals in India, Brazil & Spain</li>
+                  <li>Built FloatingWindowService for real-time POS hardware telemetry (battery, voltage, temperature)</li>
+                  <li>Reduced integration bugs through cross-module API maintenance and proactive communication</li>
+                </ul>
+                <div class="session-tech">Java · Android SDK · AIDL · REST API</div>
+              </article>
+            </div>
+
+            <div class="card-wrap" style="--tilt: -0.3deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">SESSION 002</p>
+                <h3 class="session-company foil-text">Federated Learning Recommendation System</h3>
+                <p class="session-role"><strong>College Innovation & Entrepreneurship Program</strong><br>Deputy Leader</p>
+                <p class="session-period">Dec 2022 – Mar 2023</p>
+                <ul class="session-notes">
+                  <li>Led cross-functional team of 5; delivered all research phases on time</li>
+                  <li>Evaluated Hadoop + DLRM models for privacy-preserving on-board service system</li>
+                  <li>Produced promotional video & pitch materials that secured project approval</li>
+                </ul>
+                <div class="session-tech">Python · Excel · Hadoop · DLRM · Federated Learning</div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Projects Tab -->
+        <div class="tab-content" id="tab-projects" role="tabpanel">
+          <div class="sessions-grid">
+
+            <div class="card-wrap" style="--tilt: 0.3deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">PROJECT 001</p>
+                <h3 class="session-company foil-text">Mermaid Sushi Cafe</h3>
+                <p class="session-role"><strong>Full-stack Bilingual Commercial Site</strong><br>Independent Developer</p>
+                <p class="session-period">Mar 2026 – Present</p>
+                <ul class="session-notes">
+                  <li>Built a production-grade site with Next.js 15 & React 19, featuring i18n routing and responsive UI</li>
+                  <li>Architected Sanity CMS v5 headless backend with custom schemas for multi-tier pricing and menu</li>
+                  <li>Implemented ISR (60s revalidation) and automated data pipelines for zero-downtime deployment</li>
+                  <li>Streamlined CI/CD via Vercel, managing environment variables and production build optimizations</li>
+                </ul>
+                <div class="session-tech">Next.js 15 · Sanity CMS · TypeScript · Tailwind · Vercel</div>
+                <div class="session-links">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">GitHub ↗</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">Site ↗</a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card-wrap" style="--tilt: -0.4deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">PROJECT 002</p>
+                <h3 class="session-company foil-text">Project Name</h3>
+                <p class="session-role">ML / Data pipeline</p>
+                <p class="session-period">2024</p>
+                <ul class="session-notes">
+                  <li>Trained [model type] achieving X% on [benchmark]</li>
+                  <li>Open-sourced; N+ GitHub stars</li>
+                </ul>
+                <div class="session-tech">Python · PyTorch · FastAPI</div>
+                <div class="session-links">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">GitHub ↗</a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card-wrap" style="--tilt: 0.5deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">PROJECT 003</p>
+                <h3 class="session-company foil-text">This Website</h3>
+                <p class="session-role">Personal portfolio — vinyl liner notes theme</p>
+                <p class="session-period">2025</p>
+                <ul class="session-notes">
+                  <li>Pure HTML + CSS + vanilla JS, zero dependencies</li>
+                  <li>CSS vinyl disc with counter-rotating label</li>
+                </ul>
+                <div class="session-tech">HTML · CSS · JavaScript</div>
+                <div class="session-links">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">GitHub ↗</a>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Research Tab -->
+        <div class="tab-content" id="tab-research" role="tabpanel">
+          <div class="sessions-grid research-grid">
+
+            <div class="card-wrap" style="--tilt: 0deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card research-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">PAPER 001</p>
+                <h3 class="session-company research-title foil-text">
+                  Real-Time Vehicle Tracking System
+                </h3>
+                <p class="session-role research-authors">Advisor: Kevin Wang & Akshat Bisht</p>
+                <p class="session-period">Research Project · Mar 2026 – Present</p>
+                <ul class="session-notes">
+                  <li>Benchmarked YOLOv5/8/9/10/11; selected YOLO11n — 88.1% mAP50, 59ms latency (33% faster than v9)</li>
+                  <li>Built custom semi-automatic labeling tool using HSV segmentation + manual refinement</li>
+                  <li>Integrated ArUco markers + perspective transform for 600×600px orthographic tracking</li>
+                </ul>
+                <div class="session-tech">Python · YOLO · OpenCV · ArUco · macOS/GoPro</div>
+                <div class="session-links">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">PDF ↗</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">Code ↗</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">Slides ↗</a>
+                </div>
+              </article>
+            </div>
+
+            <div class="card-wrap" style="--tilt: 0deg">
+              <div class="cd-peek" aria-hidden="true"></div>
+              <article class="session-card research-card">
+                <div class="session-tape" aria-hidden="true"></div>
+                <p class="session-label">PAPER 002</p>
+                <h3 class="session-company research-title foil-text">
+                  Deep Learning for Remote Sensing Target Recognition of Tailings Ponds
+                </h3>
+                <p class="session-role research-authors">Advisor: Prof. Yuan Yuan</p>
+                <p class="session-period">Course Project · Dec 2024 – Apr 2025</p>
+                <ul class="session-notes">
+                  <li>Built tailings pond dataset from satellite imagery; validated 1183 image slices & 1728 instances</li>
+                  <li>Engineered MFTA-YOLO with SimCSPSPPF, multi-scale feature fusion & threshold attention</li>
+                  <li>Joint loss (GIoU + BCEWithLogits) + AdamW optimizer for robust small-target detection</li>
+                </ul>
+                <div class="session-tech">Python · PyTorch · YOLO · DOTA format · AdamW</div>
+                <div class="session-links">
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">PDF ↗</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">Code ↗</a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" class="session-link">Slides ↗</a>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTION 5 — CREDITS
+    ══════════════════════════════════════════ -->
+    <section id="credits" class="section credits-section">
+      <div class="section-inner">
+
+        <div class="credits-header">
+          <h2 class="section-label">CREDITS</h2>
+        </div>
+
+        <div class="credits-grid">
+
+          <div class="credit-block">
+            <p class="credit-role">WRITTEN, PERFORMED &amp; PRODUCED BY</p>
+            <p class="credit-name">Rayven</p>
+          </div>
+          <div class="credit-block">
+            <p class="credit-role">CONTACT</p>
+            <p class="credit-name">
+              <a href="mailto:rayvenzhao@gmail.com" class="credit-link" aria-label="Email Rayven at rayvenzhao@gmail.com">rayvenzhao@gmail.com</a>
+            </p>
+          </div>
+
+          <div class="credit-block">
+            <p class="credit-role">RECORDED AT</p>
+            <p class="credit-name">University of Auckland<br>Master of Engineering Studies — Software</p>
+          </div>
+          <div class="credit-block">
+            <p class="credit-role">AVAILABLE ON</p>
+            <p class="credit-name">
+              <a href="https://github.com/Rayven85" class="credit-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in a new tab)">GitHub ↗</a><br>
+              <a href="https://www.linkedin.com/in/rayven-zhao-a66a10384" class="credit-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in a new tab)">LinkedIn ↗</a>
+            </p>
+          </div>
+
+          <div class="credit-block">
+            <p class="credit-role">MIXED &amp; MASTERED AT</p>
+            <p class="credit-name">Various coffee shops, 2am sessions,<br>and one very long flight</p>
+          </div>
+          <div class="credit-block">
+            <p class="credit-role">CURRENTLY SEEKING</p>
+            <p class="credit-name">Pre-Nov 2026 &nbsp;|&nbsp; Part-time Roles &nbsp;·&nbsp; Internships
+              <br>Nov 2026 Onwards &nbsp;|&nbsp; Full-time Roles &nbsp;·&nbsp; New Grad Positions
+              <br>SWE &nbsp;·&nbsp; CS &nbsp;·&nbsp; Full-stack &nbsp;·&nbsp; Computer Vision &nbsp;·&nbsp; Data Analysis &nbsp;·&nbsp; Web Development</p>
+          </div>
+
+          <div class="credit-block">
+            <p class="credit-role">EXECUTIVE PRODUCER</p>
+            <p class="credit-name">Curiosity &nbsp;·&nbsp; Passion &nbsp;·&nbsp; Hardworking &nbsp;·&nbsp; Teamwork</p>
+          </div>
+          <div class="credit-block">
+            <p class="credit-role">OPEN TO</p>
+            <p class="credit-name">Remote &nbsp;·&nbsp; Hybrid &nbsp;·&nbsp; Auckland</p>
+          </div>
+        </div>
+
+        <div class="credits-divider"></div>
+
+        <div class="credits-footer-text">
+          <p class="credits-legal">℗ &amp; © 2025 Rayven. All rights reserved. All bugs reserved.</p>
+          <p class="credits-legal">No algorithms were harmed in the making of this portfolio.</p>
+          <p class="credits-legal small">Pure HTML + CSS + JS. Zero dependencies. Made with care.</p>
+        </div>
+
+        <!-- Vinyl label stamp — scale animation triggered on scroll -->
+        <div class="credits-stamp" id="credits-stamp" aria-hidden="true">
+          <div class="stamp-ring stamp-ring--outer"></div>
+          <div class="stamp-ring stamp-ring--inner"></div>
+          <div class="stamp-content">
+            <p class="stamp-text">UNDEFINED</p>
+            <p class="stamp-text">BEHAVIOR</p>
+            <div class="stamp-dot"></div>
+            <p class="stamp-small">RZ-085 · STEREO · 33⅓ RPM</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
