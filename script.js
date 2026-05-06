@@ -320,8 +320,8 @@
 
       var elIdx   = 0;
       var charIdx = 0;
-      var SPEED   = 8;   // ms per character — fast but visible
-      var PAUSE   = 55;  // ms pause between paragraphs
+      var SPEED   = 4;   // ms per character — fast but visible
+      var PAUSE   = 30;  // ms pause between paragraphs
 
       function type() {
         if (elIdx >= typedEls.length) {
